@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { computed, inject, Injectable, signal } from "@angular/core";
 import { Router } from "@angular/router";
-import { AuthResponse, LoginRequest } from "../../shared";
+import { AuthResponse, LoginRequest } from "../../shared/models/auth.model";
 import { Observable, tap } from "rxjs";
 import { environment } from "../../../environments/env";
 
