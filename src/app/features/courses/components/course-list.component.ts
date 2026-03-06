@@ -6,7 +6,7 @@ import { CourseResponse } from '../../../shared/models/course.model';
 @Component({
   selector: 'app-courses-list',
   standalone: true,
-  template: `<h2>Courses — coming in Phase 2</h2>`
+  templateUrl: "./course-list.component.html"
 })
 export class CoursesListComponent implements OnInit {
   private readonly courseService = inject(CourseService);

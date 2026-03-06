@@ -6,7 +6,7 @@ import { TeacherResponse } from '../../../shared/models/teacher.model';
 @Component({
   selector: 'app-teachers-list',
   standalone: true,
-  template: `<h2>Teachers — coming in Phase 2</h2>`
+  templateUrl: "./teacher-list.component.html"
 })
 export class TeachersListComponent implements OnInit {
   private readonly teacherService = inject(TeacherService);

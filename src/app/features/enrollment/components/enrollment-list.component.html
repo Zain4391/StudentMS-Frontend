@@ -1,0 +1,83 @@
+<div class="p-6">
+
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Enrollments</h1>
+  </div>
+
+  @if (loading()) {
+    <p class="text-gray-500">Loading...</p>
+  }
+
+  @if (error()) {
+    <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
+      {{ error() }}
+    </div>
+  }
+
+  @if (!loading() && !error()) {
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse bg-white shadow rounded">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="text-left p-3 text-sm font-semibold text-gray-600">ID</th>
+            <th class="text-left p-3 text-sm font-semibold text-gray-600">Student</th>
+            <th class="text-left p-3 text-sm font-semibold text-gray-600">Course</th>
+            <th class="text-left p-3 text-sm font-semibold text-gray-600">Date</th>
+            <th class="text-left p-3 text-sm font-semibold text-gray-600">Grade</th>
+            @if (isAdmin()) {
+              <th class="text-left p-3 text-sm font-semibold text-gray-600">Actions</th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (enrollment of enrollments(); track enrollment.id) {
+            <tr class="border-t hover:bg-gray-50">
+              <td class="p-3 text-sm text-gray-700">{{ enrollment.id }}</td>
+              <td class="p-3 text-sm text-gray-700">{{ enrollment.student.name }}</td>
+              <td class="p-3 text-sm text-gray-700">{{ enrollment.course.name }}</td>
+              <td class="p-3 text-sm text-gray-700">{{ enrollment.enrollmentDate }}</td>
+              <td class="p-3 text-sm">
+                @if (enrollment.grade) {
+                  <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs font-medium">
+                    {{ enrollment.grade }}
+                  </span>
+                } @else {
+                  <span class="text-gray-400 text-xs">Pending</span>
+                }
+              </td>
+              @if (isAdmin()) {
+                <td class="p-3 text-sm">
+                  <button (click)="deleteEnrollment(enrollment.id)"
+                    class="text-red-600 hover:underline">Delete</button>
+                </td>
+              }
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="p-4 text-center text-gray-400">No enrollments found.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flex justify-between items-center mt-4">
+      <p class="text-sm text-gray-600">
+        Page {{ currentPage() + 1 }} of {{ totalPages() }} ({{ totalElements() }} total)
+      </p>
+      <div class="flex gap-2">
+        <button (click)="goToPage(currentPage() - 1)"
+          [disabled]="currentPage() === 0"
+          class="px-3 py-1 border rounded text-sm disabled:opacity-40 hover:bg-gray-100">
+          Previous
+        </button>
+        <button (click)="goToPage(currentPage() + 1)"
+          [disabled]="currentPage() >= totalPages() - 1"
+          class="px-3 py-1 border rounded text-sm disabled:opacity-40 hover:bg-gray-100">
+          Next
+        </button>
+      </div>
+    </div>
+  }
+
+</div>

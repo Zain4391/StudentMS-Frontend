@@ -6,7 +6,7 @@ import { EnrollmentResponse } from '../../../shared/models/enrollment.model';
 @Component({
   selector: 'app-enrollments-list',
   standalone: true,
-  template: `<h2>Enrollments — coming in Phase 2</h2>`
+  templateUrl: "./enrollment-list.component.html"
 })
 export class EnrollmentsListComponent implements OnInit {
   private readonly enrollmentService = inject(EnrollmentService);

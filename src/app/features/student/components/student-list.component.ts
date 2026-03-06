@@ -6,7 +6,7 @@ import { StudentResponse } from '../../../shared/models/student.model';
 @Component({
   selector: 'app-students-list',
   standalone: true,
-  template: `<h2>Students — coming in Phase 2</h2>`
+  templateUrl: "./student-list.component.html"
 })
 export class StudentsListComponent implements OnInit {
 
