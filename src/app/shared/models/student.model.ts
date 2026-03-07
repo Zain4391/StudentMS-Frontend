@@ -22,3 +22,5 @@ export interface StudentSummary {
   email: string;
   major: string;
 }
+
+export type LoginRole = "STUDENT" | "TEACHER";

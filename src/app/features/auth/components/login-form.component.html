@@ -1,0 +1,85 @@
+<div class="min-h-screen bg-gray-100 flex items-center justify-center">
+  <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+
+    <h1 class="text-2xl font-bold text-gray-800 mb-1">Student MS</h1>
+    <p class="text-gray-500 text-sm mb-6">Sign in to your account</p>
+
+    <!-- Role Selector -->
+    <div class="flex rounded overflow-hidden border mb-6">
+      <button type="button"
+        (click)="selectRole('STUDENT')"
+        [class.bg-blue-600]="selectedRole === 'STUDENT'"
+        [class.text-white]="selectedRole === 'STUDENT'"
+        [class.text-gray-600]="selectedRole !== 'STUDENT'"
+        class="flex-1 py-2 text-sm font-medium transition-colors">
+        Student
+      </button>
+      <button type="button"
+        (click)="selectRole('TEACHER')"
+        [class.bg-blue-600]="selectedRole === 'TEACHER'"
+        [class.text-white]="selectedRole === 'TEACHER'"
+        [class.text-gray-600]="selectedRole !== 'TEACHER'"
+        class="flex-1 py-2 text-sm font-medium transition-colors">
+        Teacher
+      </button>
+    </div>
+
+    @if (error) {
+      <div class="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm">
+        {{ error }}
+      </div>
+    }
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+      <!-- Email -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="you@example.com"
+          class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          [class.border-red-500]="email.invalid && email.touched"
+        />
+        @if (email.touched && email.hasError('required')) {
+          <p class="text-red-500 text-xs mt-1">Email is required.</p>
+        }
+        @if (email.touched && email.hasError('email')) {
+          <p class="text-red-500 text-xs mt-1">Enter a valid email address.</p>
+        }
+      </div>
+
+      <!-- Password -->
+      <div class="mb-6">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="••••••••"
+          class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          [class.border-red-500]="password.invalid && password.touched"
+        />
+        @if (password.touched && password.hasError('required')) {
+          <p class="text-red-500 text-xs mt-1">Password is required.</p>
+        }
+        @if (password.touched && password.hasError('minlength')) {
+          <p class="text-red-500 text-xs mt-1">Password must be at least 6 characters.</p>
+        }
+      </div>
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        [disabled]="loading"
+        class="w-full bg-blue-600 text-white py-2 rounded text-sm font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">
+        @if (loading) {
+          Signing in...
+        } @else {
+          Sign in as {{ selectedRole === 'STUDENT' ? 'Student' : 'Teacher' }}
+        }
+      </button>
+
+    </form>
+  </div>
+</div>
