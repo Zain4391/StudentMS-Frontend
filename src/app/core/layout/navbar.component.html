@@ -1,0 +1,64 @@
+<nav class="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between">
+
+  <!-- Logo -->
+  <a routerLink="/dashboard" class="text-lg font-bold text-blue-600">StudentMS</a>
+
+  <!-- Desktop Links -->
+  <div class="hidden md:flex items-center gap-6">
+    <a routerLink="/students" routerLinkActive="text-blue-600 font-semibold"
+      class="text-sm text-gray-600 hover:text-blue-600 transition-colors">
+      Students
+    </a>
+    <a routerLink="/teachers" routerLinkActive="text-blue-600 font-semibold"
+      class="text-sm text-gray-600 hover:text-blue-600 transition-colors">
+      Teachers
+    </a>
+    <a routerLink="/courses" routerLinkActive="text-blue-600 font-semibold"
+      class="text-sm text-gray-600 hover:text-blue-600 transition-colors">
+      Courses
+    </a>
+    <a routerLink="/enrollments" routerLinkActive="text-blue-600 font-semibold"
+      class="text-sm text-gray-600 hover:text-blue-600 transition-colors">
+      Enrollments
+    </a>
+  </div>
+
+  <!-- User Info + Logout -->
+  <div class="hidden md:flex items-center gap-4">
+    <span class="text-xs text-gray-400">{{ user()?.email }}</span>
+    <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-medium">
+      {{ role() }}
+    </span>
+    <button (click)="logout()"
+      class="text-sm text-red-500 hover:text-red-700 transition-colors">
+      Logout
+    </button>
+  </div>
+
+  <!-- Mobile Hamburger -->
+  <button (click)="toggleMenu()" class="md:hidden text-gray-600">
+    @if (menuOpen) {
+      ✕
+    } @else {
+      ☰
+    }
+  </button>
+
+</nav>
+
+<!-- Mobile Menu -->
+@if (menuOpen) {
+  <div class="md:hidden bg-white border-b border-gray-200 px-6 py-4 flex flex-col gap-4">
+    <a routerLink="/students" (click)="toggleMenu()"
+      class="text-sm text-gray-700 hover:text-blue-600">Students</a>
+    <a routerLink="/teachers" (click)="toggleMenu()"
+      class="text-sm text-gray-700 hover:text-blue-600">Teachers</a>
+    <a routerLink="/courses" (click)="toggleMenu()"
+      class="text-sm text-gray-700 hover:text-blue-600">Courses</a>
+    <a routerLink="/enrollments" (click)="toggleMenu()"
+      class="text-sm text-gray-700 hover:text-blue-600">Enrollments</a>
+    <hr />
+    <span class="text-xs text-gray-400">{{ user()?.email }} · {{ role() }}</span>
+    <button (click)="logout()" class="text-sm text-red-500 text-left">Logout</button>
+  </div>
+}
