@@ -1,0 +1,50 @@
+<div class="p-6 max-w-sm">
+  <div class="flex items-center gap-3 mb-6">
+    <button (click)="goBack()" class="text-gray-400 hover:text-gray-600 text-lg">←</button>
+    <h1 class="text-2xl font-bold text-gray-800">Update Grade</h1>
+  </div>
+
+  @if (error) {
+    <div class="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm">{{ error }}</div>
+  }
+
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="bg-white shadow rounded p-6 flex flex-col gap-4"
+  >
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Grade</label>
+      <select
+        formControlName="grade"
+        class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        [class.border-red-500]="form.get('grade')!.invalid && form.get('grade')!.touched"
+      >
+        <option [ngValue]="null" disabled>Select a grade</option>
+        @for (grade of grades; track grade) {
+          <option [ngValue]="grade">{{ grade }}</option>
+        }
+      </select>
+      @if (form.get('grade')!.touched && form.get('grade')!.hasError('required')) {
+        <p class="text-red-500 text-xs mt-1">Please select a grade.</p>
+      }
+    </div>
+
+    <div class="flex gap-3 pt-2">
+      <button
+        type="submit"
+        [disabled]="loading"
+        class="bg-blue-600 text-white px-5 py-2 rounded text-sm font-medium hover:bg-blue-700 disabled:opacity-50"
+      >
+        {{ loading ? 'Saving...' : 'Save Grade' }}
+      </button>
+      <button
+        type="button"
+        (click)="goBack()"
+        class="border px-5 py-2 rounded text-sm text-gray-600 hover:bg-gray-50"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

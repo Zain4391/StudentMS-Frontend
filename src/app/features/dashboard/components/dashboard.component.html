@@ -1,0 +1,57 @@
+<div class="p-6">
+  <div class="mb-8">
+    <h1 class="text-2xl font-bold text-gray-800">Welcome back, {{ user()?.email }}</h1>
+    <p class="text-sm text-gray-500 mt-1">
+      You are signed in as
+      <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full text-xs font-medium">
+        {{ role() }}
+      </span>
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <!-- Students card — admin only -->
+    @if (isAdmin()) {
+      <a
+        routerLink="/students"
+        class="bg-white rounded-lg shadow p-5 hover:shadow-md transition-shadow border-l-4 border-blue-500"
+      >
+        <p class="text-sm text-gray-500">Students</p>
+        <p class="text-lg font-semibold text-gray-800 mt-1">Manage Students</p>
+        <p class="text-xs text-blue-500 mt-2">View all →</p>
+      </a>
+    }
+
+    <!-- Teachers card — admin only -->
+    @if (isAdmin()) {
+      <a
+        routerLink="/teachers"
+        class="bg-white rounded-lg shadow p-5 hover:shadow-md transition-shadow border-l-4 border-purple-500"
+      >
+        <p class="text-sm text-gray-500">Teachers</p>
+        <p class="text-lg font-semibold text-gray-800 mt-1">Manage Teachers</p>
+        <p class="text-xs text-purple-500 mt-2">View all →</p>
+      </a>
+    }
+
+    <!-- Courses card — everyone -->
+    <a
+      routerLink="/courses"
+      class="bg-white rounded-lg shadow p-5 hover:shadow-md transition-shadow border-l-4 border-green-500"
+    >
+      <p class="text-sm text-gray-500">Courses</p>
+      <p class="text-lg font-semibold text-gray-800 mt-1">Browse Courses</p>
+      <p class="text-xs text-green-500 mt-2">View all →</p>
+    </a>
+
+    <!-- Enrollments card — everyone -->
+    <a
+      routerLink="/enrollments"
+      class="bg-white rounded-lg shadow p-5 hover:shadow-md transition-shadow border-l-4 border-orange-500"
+    >
+      <p class="text-sm text-gray-500">Enrollments</p>
+      <p class="text-lg font-semibold text-gray-800 mt-1">View Enrollments</p>
+      <p class="text-xs text-orange-500 mt-2">View all →</p>
+    </a>
+  </div>
+</div>

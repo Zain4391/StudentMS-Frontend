@@ -1,5 +1,4 @@
 <div class="p-6">
-
   <div class="flex justify-between items-center mb-6">
     <h1 class="text-2xl font-bold text-gray-800">Enrollments</h1>
   </div>
@@ -24,7 +23,7 @@
             <th class="text-left p-3 text-sm font-semibold text-gray-600">Course</th>
             <th class="text-left p-3 text-sm font-semibold text-gray-600">Date</th>
             <th class="text-left p-3 text-sm font-semibold text-gray-600">Grade</th>
-            @if (isAdmin()) {
+            @if (isAdmin() || isTeacher()) {
               <th class="text-left p-3 text-sm font-semibold text-gray-600">Actions</th>
             }
           </tr>
@@ -47,8 +46,21 @@
               </td>
               @if (isAdmin()) {
                 <td class="p-3 text-sm">
-                  <button (click)="deleteEnrollment(enrollment.id)"
-                    class="text-red-600 hover:underline">Delete</button>
+                  <button
+                    (click)="deleteEnrollment(enrollment.id)"
+                    class="text-red-600 hover:underline"
+                  >
+                    Delete
+                  </button>
+                </td>
+              }
+              @if (isTeacher()) {
+                <td class="p-3 text-sm">
+                  <a
+                    [routerLink]="['/enrollments', enrollment.id, 'grade']"
+                    class="text-blue-600 hover:underline"
+                    >Update Grade</a
+                  >
                 </td>
               }
             </tr>
@@ -66,18 +78,21 @@
         Page {{ currentPage() + 1 }} of {{ totalPages() }} ({{ totalElements() }} total)
       </p>
       <div class="flex gap-2">
-        <button (click)="goToPage(currentPage() - 1)"
+        <button
+          (click)="goToPage(currentPage() - 1)"
           [disabled]="currentPage() === 0"
-          class="px-3 py-1 border rounded text-sm disabled:opacity-40 hover:bg-gray-100">
+          class="px-3 py-1 border rounded text-sm disabled:opacity-40 hover:bg-gray-100"
+        >
           Previous
         </button>
-        <button (click)="goToPage(currentPage() + 1)"
+        <button
+          (click)="goToPage(currentPage() + 1)"
           [disabled]="currentPage() >= totalPages() - 1"
-          class="px-3 py-1 border rounded text-sm disabled:opacity-40 hover:bg-gray-100">
+          class="px-3 py-1 border rounded text-sm disabled:opacity-40 hover:bg-gray-100"
+        >
           Next
         </button>
       </div>
     </div>
   }
-
 </div>
