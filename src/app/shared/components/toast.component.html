@@ -1,0 +1,14 @@
+<div class="fixed bottom-5 right-5 flex flex-col gap-2 z-50">
+  @for (toast of toastService.toasts(); track toast.id) {
+    <div
+      class="flex items-center justify-between gap-4 px-4 py-3 rounded shadow-lg text-sm text-white min-w-64 transition-all"
+      [class.bg-green-600]="toast.type === 'success'"
+      [class.bg-red-600]="toast.type === 'error'"
+    >
+      <span>{{ toast.message }}</span>
+      <button (click)="toastService.dismiss(toast.id)" class="text-white/70 hover:text-white">
+        ✕
+      </button>
+    </div>
+  }
+</div>
