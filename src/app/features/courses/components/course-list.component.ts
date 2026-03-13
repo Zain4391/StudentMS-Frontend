@@ -1,4 +1,11 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { CourseService } from '../../../core/services/course.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { CourseResponse } from '../../../shared/models/course.model';
@@ -6,21 +13,22 @@ import { CourseResponse } from '../../../shared/models/course.model';
 @Component({
   selector: 'app-courses-list',
   standalone: true,
-  templateUrl: "./course-list.component.html"
+  templateUrl: './course-list.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoursesListComponent implements OnInit {
   private readonly courseService = inject(CourseService);
-  private readonly authService   = inject(AuthService);
+  private readonly authService = inject(AuthService);
 
-  readonly courses       = signal<CourseResponse[]>([]);
-  readonly loading       = signal(false);
-  readonly error         = signal<string | null>(null);
-  readonly currentPage   = signal(0);
-  readonly totalPages    = signal(0);
+  readonly courses = signal<CourseResponse[]>([]);
+  readonly loading = signal(false);
+  readonly error = signal<string | null>(null);
+  readonly currentPage = signal(0);
+  readonly totalPages = signal(0);
   readonly totalElements = signal(0);
 
   readonly isAdminOrTeacher = computed(
-    () => this.authService.isAdmin() || this.authService.isTeacher()
+    () => this.authService.isAdmin() || this.authService.isTeacher(),
   );
 
   ngOnInit(): void {
@@ -42,17 +50,19 @@ export class CoursesListComponent implements OnInit {
       error: (err) => {
         this.error.set(err.error?.message ?? 'Failed to load courses.');
         this.loading.set(false);
-      }
+      },
     });
   }
 
-  goToPage(page: number): void { this.loadCourses(page); }
+  goToPage(page: number): void {
+    this.loadCourses(page);
+  }
 
   deleteCourse(id: number): void {
     if (!confirm('Delete this course?')) return;
     this.courseService.delete(id).subscribe({
       next: () => this.loadCourses(this.currentPage()),
-      error: (err) => this.error.set(err.error?.message ?? 'Delete failed.')
+      error: (err) => this.error.set(err.error?.message ?? 'Delete failed.'),
     });
   }
 }

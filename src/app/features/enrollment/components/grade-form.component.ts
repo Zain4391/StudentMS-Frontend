@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EnrollmentService } from '../../../core/services/enrollment.service';
@@ -10,6 +10,7 @@ import { Grade } from '../../../shared/models/enums';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './grade-form.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GradeFormComponent implements OnInit {
   private fb = inject(FormBuilder);

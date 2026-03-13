@@ -1,4 +1,11 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { TeacherService } from '../../../core/services/teacher.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { TeacherResponse } from '../../../shared/models/teacher.model';
@@ -6,17 +13,18 @@ import { TeacherResponse } from '../../../shared/models/teacher.model';
 @Component({
   selector: 'app-teachers-list',
   standalone: true,
-  templateUrl: "./teacher-list.component.html"
+  templateUrl: './teacher-list.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeachersListComponent implements OnInit {
   private readonly teacherService = inject(TeacherService);
-  private readonly authService    = inject(AuthService);
+  private readonly authService = inject(AuthService);
 
-  readonly teachers      = signal<TeacherResponse[]>([]);
-  readonly loading       = signal(false);
-  readonly error         = signal<string | null>(null);
-  readonly currentPage   = signal(0);
-  readonly totalPages    = signal(0);
+  readonly teachers = signal<TeacherResponse[]>([]);
+  readonly loading = signal(false);
+  readonly error = signal<string | null>(null);
+  readonly currentPage = signal(0);
+  readonly totalPages = signal(0);
   readonly totalElements = signal(0);
 
   readonly isAdmin = computed(() => this.authService.isAdmin());
@@ -40,17 +48,19 @@ export class TeachersListComponent implements OnInit {
       error: (err) => {
         this.error.set(err.error?.message ?? 'Failed to load teachers.');
         this.loading.set(false);
-      }
+      },
     });
   }
 
-  goToPage(page: number): void { this.loadTeachers(page); }
+  goToPage(page: number): void {
+    this.loadTeachers(page);
+  }
 
   deleteTeacher(id: number): void {
     if (!confirm('Delete this teacher?')) return;
     this.teacherService.delete(id).subscribe({
       next: () => this.loadTeachers(this.currentPage()),
-      error: (err) => this.error.set(err.error?.message ?? 'Delete failed.')
+      error: (err) => this.error.set(err.error?.message ?? 'Delete failed.'),
     });
   }
 }

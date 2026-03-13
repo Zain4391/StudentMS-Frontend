@@ -1,4 +1,11 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { EnrollmentService } from '../../../core/services/enrollment.service';
 import { AuthService } from '../../../core/services/auth.service';
@@ -9,6 +16,7 @@ import { EnrollmentResponse } from '../../../shared/models/enrollment.model';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './enrollment-list.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EnrollmentsListComponent implements OnInit {
   private readonly enrollmentService = inject(EnrollmentService);

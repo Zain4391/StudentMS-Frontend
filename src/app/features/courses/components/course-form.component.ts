@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from '../../../core/services/course.service';
@@ -10,6 +10,7 @@ import { TeacherResponse } from '../../../shared/models/teacher.model';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './course-form.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CourseFormComponent implements OnInit {
   private fb = inject(FormBuilder);
