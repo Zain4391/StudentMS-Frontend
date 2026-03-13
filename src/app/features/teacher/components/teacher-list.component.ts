@@ -9,10 +9,12 @@ import {
 import { TeacherService } from '../../../core/services/teacher.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { TeacherResponse } from '../../../shared/models/teacher.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-teachers-list',
   standalone: true,
+  imports: [RouterLink],
   templateUrl: './teacher-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -9,10 +9,12 @@ import {
 import { StudentService } from '../../../core/services/student.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { StudentResponse } from '../../../shared/models/student.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-students-list',
   standalone: true,
+  imports: [RouterLink],
   templateUrl: './student-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

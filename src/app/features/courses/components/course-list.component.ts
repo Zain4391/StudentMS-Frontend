@@ -9,10 +9,12 @@ import {
 import { CourseService } from '../../../core/services/course.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { CourseResponse } from '../../../shared/models/course.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-courses-list',
   standalone: true,
+  imports: [RouterLink],
   templateUrl: './course-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
