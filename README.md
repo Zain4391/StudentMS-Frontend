@@ -1,30 +1,40 @@
-# StudentMSFrontend
+# Student Management System (StudentMS) - Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.1.
+This project is the frontend client for the Student Management System (StudentMS), built using [Angular](https://angular.dev/) (version 21.1.1). It provides a comprehensive interface for managing students, teachers, courses, and enrollments.
 
-## Development server
+## Features
+
+- **Authentication:** Secure login and session management (Auth Guards & Interceptors).
+- **Dashboard:** Overview and quick links to various management sections.
+- **Student Management:** Add, edit, list, and view student records.
+- **Teacher Management:** Add, edit, list, and view teacher personnel data.
+- **Course Management:** Create, assign, and manage courses.
+- **Enrollments & Grading:** Enroll students in courses and assign grades.
+
+## Project Structure
+
+The project follows a modular Architecture:
+
+- `core/`: Application-wide singletons (Guards, Interceptors, Services, main Layout).
+- `features/`: Domain-specific modules (Auth, Dashboard, Students, Teachers, Courses, Enrollment).
+- `shared/`: Reusable, generic UI components (Toast, Confirm Dialog) and TS Interfaces/Models.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js and npm installed.
+
+### Development server
 
 To start a local development server, run:
 
 ```bash
+npm install
 ng serve
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
 
 ## Building
 
@@ -36,24 +46,10 @@ ng build
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
+## Testing
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+To execute unit tests with [Vitest](https://vitest.dev/), use the following command:
 
 ```bash
 ng test
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
